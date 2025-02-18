@@ -1,0 +1,35 @@
+# Go binary files
+/bin
+/obj
+
+# Go workspace
+.go_workspace
+.go_workspace.xml
+
+# Go modules
+/go.sum
+/go.mod
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Test binary files
+*.test
+
+# Coverage output
+*.out
+
+# Vendor directory
+/vendor/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.swp
