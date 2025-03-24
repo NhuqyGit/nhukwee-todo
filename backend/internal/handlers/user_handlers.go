@@ -3,7 +3,7 @@ package handlers
 import (
 	"backend/internal/services"
 	"encoding/json"
-	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -20,6 +20,7 @@ func NewUserHandler(service *services.UserService) *UserHandler {
 func (h *UserHandler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 	users, err := h.service.GetAllUsers()
 	if err != nil {
+		log.Fatal(err)
 		http.Error(w, "Failed to fetch users", http.StatusInternalServerError)
 		return
 	}
@@ -27,16 +28,18 @@ func (h *UserHandler) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *UserHandler) GetUserHandlerById(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("HELLO")
 	parts := strings.Split(r.URL.Path, "/")
-	if len(parts) < 3 || parts[1] != "users" {
+	if len(parts) < 3 || parts[1] != "user" {
 		http.Error(w, "Invalid URL", http.StatusBadRequest)
 	}
 
 	id, err := strconv.ParseInt(parts[2], 10, 64)
+	if err != nil {
+		http.Error(w, "Failed to parse id", http.StatusInternalServerError)
+		return
+	}
 	user, err := h.service.GetUserByID(id)
 
-	fmt.Println("HELLO")
 	if err != nil {
 		http.Error(w, "Failed to fetch user", http.StatusInternalServerError)
 		return
