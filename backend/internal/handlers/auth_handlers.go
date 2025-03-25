@@ -3,6 +3,7 @@ package handlers
 import (
 	"backend/internal/models"
 	"backend/internal/services"
+	"backend/internal/utils"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -28,7 +29,6 @@ func (h *AuthHandler) SignupHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	log.Println("HELLL")
 
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		log.Println(err)
@@ -54,17 +54,12 @@ func (h *AuthHandler) SigninHandler(w http.ResponseWriter, r *http.Request) {
 		Password string `json:"password"`
 	}
 
-	// Đọc raw body
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, "Failed to read request body", http.StatusInternalServerError)
 		return
 	}
 
-	// Debug: In raw body để kiểm tra JSON
-	fmt.Println("Raw Body:", string(body))
-
-	// Giải mã JSON
 	if err := json.Unmarshal(body, &input); err != nil {
 		fmt.Println("JSON Decode Error:", err)
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
@@ -86,6 +81,15 @@ func (h *AuthHandler) SigninHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	signedToken, error := utils.GenerateJWT(user.Username)
+	if error != nil {
+		log.Println("Fail to create token", error)
+	}
+
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"message": "Login successful", "user_id": strconv.FormatInt(user.ID, 10)})
+	json.NewEncoder(w).Encode(map[string]string{
+		"message":      "Login successful",
+		"user_id":      strconv.FormatInt(user.ID, 10),
+		"access_token": signedToken,
+	})
 }

@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	// Init()
 	server := router.NewRouter()
 
 	if err := http.ListenAndServe(":8080", server); err != nil {

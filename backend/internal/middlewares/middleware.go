@@ -1,9 +1,11 @@
 package middlewares
 
 import (
+	"backend/internal/utils"
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -21,11 +23,26 @@ func LoggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-func AuthLogin(next http.HandlerFunc) http.HandlerFunc {
+func JWTMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// username, password, ok := r.BasicAuth()
-		if Username != "nhuqy" || Password != "12345" {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		authHeader := r.Header.Get("Authorization")
+		if authHeader == "" {
+			http.Error(w, "Token doesn't exist", http.StatusUnauthorized)
+			return
+		}
+
+		// Check format "Bearer <token>""
+		parts := strings.Split(authHeader, " ")
+		if len(parts) != 2 || parts[0] != "Bearer" {
+			http.Error(w, "Token with wrong format", http.StatusUnauthorized)
+			return
+		}
+
+		tokenString := parts[1]
+
+		token, err := utils.ValidateJWT(tokenString)
+		if err != nil || !token.Valid {
+			http.Error(w, "Token invalid", http.StatusUnauthorized)
 			return
 		}
 		next(w, r)

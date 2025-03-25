@@ -15,6 +15,12 @@ func RegisterUserRoutes(mux *http.ServeMux) {
 	userServices := services.NewUserService(userRepo)
 	userHandler := handlers.NewUserHandler(userServices)
 
-	mux.HandleFunc("GET /users", midd.ChainMiddleware(userHandler.GetUserHandler, midd.LoggingMiddleware, midd.AuthLogin))
-	mux.HandleFunc("GET /user/{id}", midd.ChainMiddleware(userHandler.GetUserHandlerById, midd.LoggingMiddleware, midd.AuthLogin))
+	mux.HandleFunc("GET /users", midd.ChainMiddleware(
+		userHandler.GetUserHandler,
+		midd.LoggingMiddleware,
+		midd.JWTMiddleware))
+	mux.HandleFunc("GET /user/{id}", midd.ChainMiddleware(
+		userHandler.GetUserHandlerById,
+		midd.LoggingMiddleware,
+		midd.JWTMiddleware))
 }
