@@ -18,9 +18,13 @@ func RegisterUserRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("GET /users", midd.ChainMiddleware(
 		userHandler.GetUserHandler,
 		midd.LoggingMiddleware,
-		midd.JWTMiddleware))
-	mux.HandleFunc("GET /user/{id}", midd.ChainMiddleware(
+		midd.JWTMiddleware,
+		midd.CORSMiddleware,
+		))
+		mux.HandleFunc("GET /user/{id}", midd.ChainMiddleware(
 		userHandler.GetUserHandlerById,
 		midd.LoggingMiddleware,
-		midd.JWTMiddleware))
+		midd.JWTMiddleware,
+		midd.CORSMiddleware,
+		))
 }

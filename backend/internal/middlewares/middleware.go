@@ -42,7 +42,7 @@ func JWTMiddleware(next http.HandlerFunc) http.HandlerFunc {
 
 		token, err := utils.ValidateJWT(tokenString)
 		if err != nil || !token.Valid {
-			http.Error(w, "Token invalid", http.StatusUnauthorized)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
 		next(w, r)
