@@ -1,13 +1,23 @@
 import React from "react";
 import Header from "./Header";
 import Todo from "./Todo";
+import { useAuth } from "../hooks/AuthProvider";
+import "./DashBoard.scss";
 
-const DashBoard = ({ theme, changeTheme }) => {
+const DashBoard = () => {
+    const common = useAuth();
     return (
-        <>
-            <Header theme={theme} />
-            <Todo changeTheme={changeTheme} />;
-        </>
+        <div
+            className="dashboard"
+            style={{
+                background: `${
+                    common.theme === true ? "white" : "var(--body-color)"
+                }`,
+            }}
+        >
+            <Header />
+            <Todo />;
+        </div>
     );
 };
 

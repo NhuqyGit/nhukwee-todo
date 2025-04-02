@@ -16,9 +16,11 @@ func RegisterAuthRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/signup", midd.ChainMiddleware(
 		authHandler.SignupHandler,
 		midd.CORSMiddleware,
+		midd.LoggingMiddleware,
 	))
 	mux.HandleFunc("/signin", midd.ChainMiddleware(
 		authHandler.SigninHandler,
 		midd.CORSMiddleware,
+		midd.LoggingMiddleware,
 	))
 }

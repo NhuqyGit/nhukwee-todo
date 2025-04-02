@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./Todo.css";
+import "./Todo.scss";
+import { useAuth } from "../hooks/AuthProvider";
 
-const Todo = (props) => {
+const Todo = () => {
+    const common = useAuth();
     const LOCAL_STORAGE_KEY = "todolists";
     const [todoList, setTodoList] = useState([]);
     const [title, setTodo] = useState("");
     const [type, setType] = useState("All");
-    const [theme, setTheme] = useState(false);
+    // const [theme, setTheme] = useState(false);
     useEffect(() => {
         const todoDataLocal = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (todoDataLocal) setTodoList(JSON.parse(todoDataLocal));
@@ -17,11 +19,11 @@ const Todo = (props) => {
         console.log(todoList);
     }, [todoList]);
 
-    useEffect(() => {
-        const { changeTheme } = props;
-        changeTheme(theme);
-        console.log(theme);
-    }, [props, theme]);
+    // useEffect(() => {
+    //     const { changeTheme } = props;
+    //     changeTheme(theme);
+    //     console.log(theme);
+    // }, [props, theme]);
 
     const submitHandle = (e) => {
         e.preventDefault();
@@ -122,7 +124,7 @@ const Todo = (props) => {
                             strokeWidth="1"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            class="feather feather-x"
+                            className="feather feather-x"
                         >
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -142,22 +144,22 @@ const Todo = (props) => {
         setTodoList(newTodoList);
     };
 
-    const changeTheme = `${theme === true ? "light-theme" : ""}`;
+    const changeTheme = `${common.theme === true ? "light-theme" : ""}`;
     return (
         <main>
             <div className="main-container">
                 <div className="todo-form">
                     <div className="todo-form--title">
-                        <h1 class="title-todo" style={{ color: "white" }}>
+                        <h1 className="title-todo" style={{ color: "white" }}>
                             <span>T</span>
                             <span>O</span>
                             <span>D</span>
                             <span>O</span>
                         </h1>
-                        <button onClick={() => setTheme(!theme)}>
+                        <button onClick={common.changeTheme}>
                             <svg
                                 className={`sun-icon ${
-                                    theme === true ? "animationOut" : ""
+                                    common.theme === true ? "animationOut" : ""
                                 }`}
                                 width="32"
                                 height="32"
@@ -205,7 +207,7 @@ const Todo = (props) => {
 
                             <svg
                                 className={`moon-icon ${
-                                    theme === true ? "animationIn" : ""
+                                    common.theme === true ? "animationIn" : ""
                                 }`}
                                 width="32"
                                 height="32"
@@ -236,7 +238,7 @@ const Todo = (props) => {
                             </label>
                             <input
                                 className={`iPut ${
-                                    theme === true ? "light-text" : ""
+                                    common.theme === true ? "light-text" : ""
                                 }`}
                                 placeholder="Create a new todo..."
                                 value={title}
