@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "./Header";
 import Todo from "./Todo";
-import { useAuth } from "../hooks/AuthProvider";
+
+import { useTheme } from "../hooks/ThemeProvider";
 import "./DashBoard.scss";
 
 const DashBoard = () => {
-    const common = useAuth();
+    const common = useTheme();
     return (
         <div
             className="dashboard"

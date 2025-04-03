@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Todo.scss";
-import { useAuth } from "../hooks/AuthProvider";
-
+import { useTheme } from "../hooks/ThemeProvider";
 const Todo = () => {
-    const common = useAuth();
+    const common = useTheme();
     const LOCAL_STORAGE_KEY = "todolists";
     const [todoList, setTodoList] = useState([]);
     const [title, setTodo] = useState("");

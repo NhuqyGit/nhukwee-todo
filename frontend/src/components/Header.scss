@@ -3,6 +3,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 2.5rem 0;
 }
 
 .background {
@@ -34,9 +35,13 @@ header {
     color: #e2b714 !important;
 
     h1 {
-        font-size: 1.5rem !important;
+        font-size: 2rem !important;
+        line-height: 2rem;
         font-weight: 400 !important;
         margin: 0;
         margin-left: 0.6rem;
+        font-weight: 600 !important;
+        letter-spacing: -1px;
+        font-family: "Lexend Deca", sans-serif;
     }
 }

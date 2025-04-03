@@ -1,5 +1,6 @@
 .App {
-    /* background: var(--body-color); */
-    transition: all ease 0.5s;
-    height: 100%;
+    background: var(--dark-background);
+    min-height: 100vh;
+    padding: 0rem 6rem;
+    overflow: hidden;
 }

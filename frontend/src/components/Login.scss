@@ -1,7 +1,156 @@
 .login-container {
     position: relative;
-    height: 100%;
-    width: 100%;
+    transition: all ease 0.5s;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.form-register,
+.form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 17rem;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    color: var(--dark-text-secondary);
+    gap: 5px;
+}
+
+.line-or {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+        padding: 2px;
+        background: var(--dark-background-sec);
+        border-radius: 20px;
+        width: 40%;
+    }
+}
+
+.btn-submit {
+    padding: 0.5em;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    background: var(--dark-background-sec);
+    color: var(--dark-text-primary);
+    font-family: var(--font);
+    line-height: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--dark-text-primary);
+        color: var(--dark-background-sec);
+    }
+
+    &:disabled {
+        background: var(--dark-background-sec);
+        color: var(--dark-text-primary);
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+        background: var(--dark-background-sec);
+        color: var(--dark-text-primary);
+    }
+}
+
+.icon-gg {
+    padding: 0.5em;
+    // padding-right: 2.1rem;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    background: var(--dark-background-sec);
+    color: var(--dark-text-primary);
+    line-height: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+
+    &:hover {
+        background: var(--dark-text-primary);
+        color: var(--dark-background-sec);
+    }
+}
+
+.form_control {
+    position: relative;
+    background: var(--dark-background-sec);
+    border-radius: 8px;
+    // width: 17rem;
+    transition: border 0.3s ease; /* Thêm transition nếu muốn hiệu ứng mượt mà */
+
+    /* Áp dụng outline cho form_control khi bất kỳ input nào bên trong được focus */
+    &:focus-within {
+        outline: 2px solid var(--dark-text-primary); /* Màu của outline, có thể thay đổi */
+    }
+
+    input {
+        padding: 0.5em;
+        padding-right: 2.1rem;
+        font-size: 1em;
+        background: none;
+        border: none;
+        color: var(--dark-text-primary);
+        font-family: var(--font);
+        line-height: 1.25em;
+        caret-color: var(--dark-primary);
+
+        &:focus {
+            outline: none;
+        }
+
+        ::placeholder {
+            // color: #646669;
+        }
+    }
+
+    .input-status {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.25em;
+        height: 2.25em;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        div {
+            display: flex;
+        }
+
+        .hidden {
+            display: none;
+        }
+    }
+}
+
+// Check box
+.input-checkbox {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    input {
+        accent-color: antiquewhite;
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
 }
 
 .loading {

@@ -10,6 +10,32 @@
     --active: #3a7bfd;
     --text-light: #484b6a;
     --shadow: transparent;
+
+    --error-color: #ca4754;
+
+    --light-primary: #e2b714; /* Màu chính */
+    --light-secondary: #080909; /* Màu phụ */
+    --light-accent: #99947f; /* Màu nhấn */
+    --light-background: #eeebe2; /* Màu nền chính */
+    --light-background-sec: #7fa480; /* Màu nền phụ */
+    --light-background-third: #c87e74; /* Màu nền phụ */
+    --light-border: #cccccc; /* Màu viền */
+    --light-text-primary: #080909; /* Màu chữ chính */
+    --light-text-secondary: #99947f; /* Màu chữ phụ */
+
+    --dark-primary: #e2b714; /* Màu chính */
+    --dark-secondary: #ff5733; /* Màu phụ */
+    --dark-accent: #ffd700; /* Màu nhấn */
+    --dark-background: #161722; /* Màu nền chính */
+    --dark-background-sec: #25273c; /* Màu nền phụ */
+    --dark-border: #cccccc; /* Màu viền */
+    --dark-text-primary: #d1d0c5; /* Màu chữ chính */
+    --dark-text-secondary: #646669; /* Màu chữ phụ */
+
+    --font: "Roboto Mono", monospace;
+}
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -22,7 +48,9 @@ body {
     /* background: var(--body-color); */
 
     /* font-family: "Josefin Sans", sans-serif; */
-    font-family: "Comic Neue", cursive;
+    /* font-family: "Comic Neue", cursive; */
+    font-family: "Roboto Mono", monospace;
+    background: var(--dark-background);
 
     height: 100vh;
     user-select: none;

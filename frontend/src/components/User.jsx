@@ -1,35 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaUser } from "react-icons/fa6";
 import { FaSignOutAlt, FaCog, FaBell } from "react-icons/fa";
 import "./User.scss";
 import { useAuth } from "../hooks/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const User = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const user = useAuth();
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+    const navigate = useNavigate();
 
     return (
         <div className="user-container">
-            <div className="btn-user" onClick={toggleMenu}>
+            <div className="btn-user" onClick={() => navigate("/login")}>
                 <FaUser color="white" />
             </div>
 
             {/* Dropdown menu */}
-            <div className={`dropdown-menu `}>
-                <div className="menu-item">
-                    <FaCog color="white" />
+            {user.token ? (
+                <div className={`dropdown-menu `}>
+                    <div className="menu-item">
+                        <FaCog color="white" />
+                    </div>
+                    <div className="menu-item">
+                        <FaBell color="white" />
+                    </div>
+                    <div className="menu-item" onClick={user.logOut}>
+                        <FaSignOutAlt color="white" />
+                    </div>
                 </div>
-                <div className="menu-item">
-                    <FaBell color="white" />
-                </div>
-                <div className="menu-item" onClick={user.logOut}>
-                    <FaSignOutAlt color="white" />
-                </div>
-            </div>
+            ) : null}
         </div>
     );
 };

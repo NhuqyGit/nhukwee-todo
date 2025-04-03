@@ -1,14 +1,15 @@
 import React from "react";
-import DarkBack from "../image/background.jpg";
-import LightBack from "../image/background1.png";
+// import DarkBack from "../image/background.jpg";
+// import LightBack from "../image/background1.png";
 import "./Header.scss";
 import User from "./User";
 import Logo from "../image/logo.svg";
 // import { useAuth } from "../hooks/AuthProvider";
+// import { useTheme } from "../hooks/ThemeProvider";
 
 const Header = () => {
-    // const user = useAuth();
-    // const theme = user.theme === false ? DarkBack : LightBack;
+    // const common = useTheme();
+    // const theme = common.theme === false ? DarkBack : LightBack;
 
     return (
         <header>

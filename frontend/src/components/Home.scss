@@ -1,6 +1,14 @@
 .home-container {
-    /* height: 100%;
-    width: 100%; */
-    padding: 0 4rem;
-    padding-top: 2rem;
+    // height: 100%;
+    // transition: all ease 0.5s;
+}
+
+.light-theme {
+    background: var(--light-background) !important;
+    color: var(--light-text-primary) !important;
+}
+
+.dark-theme {
+    background: var(--dark-background) !important;
+    color: var(--dark-text-primary) !important;
 }

@@ -1,16 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/AuthProvider";
-import Header from "./Header";
 import "./Home.scss";
+import { useTheme } from "../hooks/ThemeProvider";
 
 const Home = () => {
-    const common = useAuth();
-    const navigate = useNavigate();
+    const common = useTheme();
+
     return (
-        <div className="home-container">
-            <Header />
-            <button onClick={() => navigate("/login")}>Login</button>
+        <div className={`home-container ${common.themeVar}`}>
+            <button onClick={common.changeTheme}>Switch</button>
             <h1>Welcome to the Home Page</h1>
             <p>This is the main landing page.</p>
         </div>
